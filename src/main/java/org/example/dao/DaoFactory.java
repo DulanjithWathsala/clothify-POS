@@ -9,7 +9,8 @@ public class DaoFactory {
     private DaoFactory(){}
 
     public static DaoFactory getInstance(){
-        return instance!=null?instance:(instance=new DaoFactory());
+        return instance != null ? instance
+                : (instance = new DaoFactory());
     }
 
     public <T extends SuperDao>T getDao(DaoType type){

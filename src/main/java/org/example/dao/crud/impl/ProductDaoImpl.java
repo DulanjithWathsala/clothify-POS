@@ -53,7 +53,6 @@ public class ProductDaoImpl implements ProductDao {
         query.setParameter("id",productEntity.getId());
         query.setParameter("name",productEntity.getName());
         query.setParameter("qty",productEntity.getQty());
-        query.setParameter("size",productEntity.getSize());
         query.setParameter("category",productEntity.getCategory());
         query.setParameter("price",productEntity.getPrice());
 

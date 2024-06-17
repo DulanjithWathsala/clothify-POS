@@ -1,24 +1,27 @@
 package org.example.controller;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class ManageEmployeeFormController {
+public class PlaceOrderFormController implements Initializable {
 
     @FXML
-    private Button btnAdd;
+    private Button btnAddToCart;
 
     @FXML
     private Button btnCustomerDetails;
 
     @FXML
     private Button btnDashboard;
-
-    @FXML
-    private Button btnDelete;
 
     @FXML
     private Button btnManageEmployee;
@@ -30,19 +33,39 @@ public class ManageEmployeeFormController {
     private Button btnProductDetails;
 
     @FXML
-    private Button btnSearch;
-
-    @FXML
     private Button btnSupplierDetails;
 
     @FXML
-    private Button btnUpdate;
+    private ComboBox<?> cmbCustomerId;
 
     @FXML
-    private TableView<?> tblEmployee;
+    private ComboBox<?> cmbItemId;
 
-    public void btnAddOnAction(ActionEvent actionEvent) {
-    }
+    @FXML
+    private TableView<?> tblCart;
+
+    @FXML
+    private TextField txtCustomerAddress;
+
+    @FXML
+    private TextField txtCustomerEmail;
+
+    @FXML
+    private TextField txtCustomerName;
+
+    @FXML
+    private TextField txtItemName;
+
+    @FXML
+    private TextField txtItemQty;
+
+    @FXML
+    private TextField txtOrderId;
+
+    @FXML
+    private TextField txtPrice;
+
+
 
     public void btnDashboardOnAction(ActionEvent actionEvent) {
     }
@@ -62,12 +85,8 @@ public class ManageEmployeeFormController {
     public void btnSupplierDetailsOnAction(ActionEvent actionEvent) {
     }
 
-    public void btnUpdateOnAction(ActionEvent actionEvent) {
-    }
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
 
-    public void btnDeleteOnAction(ActionEvent actionEvent) {
-    }
-
-    public void btnSearchOnAction(ActionEvent actionEvent) {
     }
 }

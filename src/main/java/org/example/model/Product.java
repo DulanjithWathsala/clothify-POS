@@ -1,6 +1,5 @@
-package org.example.entitiy;
+package org.example.model;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,17 +7,16 @@ import lombok.Setter;
 
 @Setter
 @Getter
-@AllArgsConstructor
 @NoArgsConstructor
-@Entity(name = "product")
-@Table(name = "product")
-public class ProductEntity {
+@AllArgsConstructor
+public class Product {
 
-    @Id
     private String id;
     private String name;
+    private int size;
     private int qty;
     private String category;
+
     private double price;
     private String supId;
 }

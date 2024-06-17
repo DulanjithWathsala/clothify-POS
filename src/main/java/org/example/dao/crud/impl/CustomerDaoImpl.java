@@ -79,4 +79,21 @@ public class CustomerDaoImpl implements CustomerDao {
 
         return i > 0;
     }
+
+    @Override
+    public String getLatestId() {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+
+        Query query = session.createQuery("SELECT id FROM customer ORDER BY id DESC LIMIT 1");
+        String id = (String) query.uniqueResult();
+
+        session.close();
+        return id;
+    }
+
+    @Override
+    public ObservableList<CustomerEntity> getAllByEmpIds(String id) {
+        return null;
+    }
 }
