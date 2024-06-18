@@ -72,10 +72,10 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <TextField layoutX="310.0" layoutY="76.0" prefHeight="26.0" prefWidth="230.0" promptText="Employee ID" />
-      <TextField layoutX="310.0" layoutY="122.0" prefHeight="26.0" prefWidth="230.0" promptText="Employee Name" />
-      <TextField layoutX="310.0" layoutY="171.0" prefHeight="26.0" prefWidth="230.0" promptText="Email" />
-      <TextField layoutX="310.0" layoutY="218.0" prefHeight="26.0" prefWidth="230.0" promptText="Address" />
+      <TextField fx:id="txtEmployeeId" layoutX="310.0" layoutY="76.0" prefHeight="26.0" prefWidth="230.0" promptText="Employee ID" />
+      <TextField fx:id="txtEmployeeName" layoutX="310.0" layoutY="122.0" prefHeight="26.0" prefWidth="230.0" promptText="Employee Name" />
+      <TextField fx:id="txtEmployeeEmail" layoutX="310.0" layoutY="171.0" prefHeight="26.0" prefWidth="230.0" promptText="Email" />
+      <TextField fx:id="txtEmployeeAddress" layoutX="310.0" layoutY="218.0" prefHeight="26.0" prefWidth="230.0" promptText="Address" />
       <Button fx:id="btnAdd" layoutX="590.0" layoutY="123.0" mnemonicParsing="false" onAction="#btnAddOnAction" prefHeight="26.0" prefWidth="102.0" style="-fx-background-color: #00AA0A;" text="Add" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
@@ -99,10 +99,5 @@
             <TableColumn prefWidth="153.5999755859375" text="Address" />
         </columns>
       </TableView>
-      <Button fx:id="btnSearch" layoutX="590.0" layoutY="171.0" mnemonicParsing="false" onAction="#btnSearchOnAction" prefHeight="26.0" prefWidth="102.0" style="-fx-background-color: #007391;" text="Search" textFill="WHITE">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
    </children>
 </AnchorPane>

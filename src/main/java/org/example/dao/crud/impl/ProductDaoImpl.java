@@ -12,7 +12,7 @@ import java.util.List;
 
 public class ProductDaoImpl implements ProductDao {
     @Override
-    public ProductEntity search(String s) {
+    public ProductEntity search(String s){
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
         Query query = session.createQuery("FROM product WHERE id=:id");
@@ -24,7 +24,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public ObservableList<ProductEntity> getAll() {
+    public ObservableList<ProductEntity> getAll(){
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
         List<ProductEntity> list = session.createQuery("FROM product").list();
@@ -37,7 +37,7 @@ public class ProductDaoImpl implements ProductDao {
     }
 
     @Override
-    public void insert(ProductEntity productEntity) {
+    public void insert(ProductEntity productEntity){
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
         session.persist(productEntity);
@@ -73,5 +73,30 @@ public class ProductDaoImpl implements ProductDao {
         session.close();
 
         return i > 0;
+    }
+
+    @Override
+    public String getLatestId(){
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+
+        Query query = session.createQuery("SELECT id FROM product ORDER BY id DESC LIMIT 1");
+        String id = (String) query.uniqueResult();
+
+        session.close();
+
+        return id;
+    }
+
+    @Override
+    public ObservableList<String> getAllIds(){
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        List<String> list = session.createQuery("SELECT id FROM product").list();
+        session.close();
+        ObservableList<String> idList = FXCollections.observableArrayList();
+
+        idList.addAll(list);
+        return idList;
     }
 }

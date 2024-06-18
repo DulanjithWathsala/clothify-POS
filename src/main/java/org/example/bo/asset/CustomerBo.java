@@ -2,9 +2,10 @@ package org.example.bo.asset;
 
 
 import javafx.collections.ObservableList;
+import org.example.bo.SuperBo;
 import org.example.model.Customer;
 
-public interface CustomerBo {
+public interface CustomerBo extends SuperBo {
 
     String generateCustomerId();
 

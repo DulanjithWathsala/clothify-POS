@@ -1,8 +1,9 @@
 package org.example.bo.asset;
 
 import jakarta.persistence.criteria.Order;
+import org.example.bo.SuperBo;
 
-public interface OrderBo {
+public interface OrderBo extends SuperBo {
 
     void saveOrder(Order order);
 

@@ -62,4 +62,26 @@ public class SupplierDaoImpl implements SupplierDao {
         session.close();
         return i > 0;
     }
+
+    @Override
+    public String getLatestId(){
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+
+        Query query = session.createQuery("SELECT id FROM supplier ORDER BY id DESC LIMIT 1");
+        String id = (String) query.uniqueResult();
+        session.close();
+        return id;
+    }
+
+    public ObservableList<String> getAllIds(){
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+        List<String> list = session.createQuery("SELECT id FROM supplier").list();
+        session.close();
+
+        ObservableList<String> idList = FXCollections.observableArrayList();
+        idList.addAll(list);
+        return idList;
+    }
 }

@@ -2,11 +2,21 @@ package org.example.controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import net.sf.jasperreports.engine.JRException;
+import org.example.bo.asset.impl.UserBoImpl;
+import org.example.model.User;
+
+import java.net.URL;
+import java.sql.SQLException;
+import java.util.ResourceBundle;
 
 
-public class ManageEmployeeFormController {
+public class ManageEmployeeFormController implements Initializable {
 
     @FXML
     private Button btnAdd;
@@ -30,9 +40,6 @@ public class ManageEmployeeFormController {
     private Button btnProductDetails;
 
     @FXML
-    private Button btnSearch;
-
-    @FXML
     private Button btnSupplierDetails;
 
     @FXML
@@ -41,7 +48,47 @@ public class ManageEmployeeFormController {
     @FXML
     private TableView<?> tblEmployee;
 
-    public void btnAddOnAction(ActionEvent actionEvent) {
+    @FXML
+    private TextField txtEmployeeAddress;
+
+    @FXML
+    private TextField txtEmployeeEmail;
+
+    @FXML
+    private TextField txtEmployeeId;
+
+    @FXML
+    private TextField txtEmployeeName;
+
+    private final UserBoImpl userBo = new UserBoImpl();
+
+    private String currentId;
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        txtEmployeeId.setEditable(false);
+        this.currentId = userBo.generateEmployeeId();
+    }
+
+    public void btnAddOnAction(ActionEvent actionEvent){
+        User user = new User(
+                currentId,
+                txtEmployeeName.getText(),
+                txtEmployeeEmail.getText(),
+                "Dula@123",
+                txtEmployeeAddress.getText()
+        );
+
+        userBo.insertUser(user);
+
+        new Alert(Alert.AlertType.INFORMATION, "Employee Added Successfully").show();
+        clearTextFields();
+    }
+
+    private void clearTextFields(){
+        txtEmployeeId.setText("");
+        txtEmployeeName.setText("");
+        txtEmployeeEmail.setText("");
+        txtEmployeeAddress.setText("");
     }
 
     public void btnDashboardOnAction(ActionEvent actionEvent) {
@@ -66,8 +113,5 @@ public class ManageEmployeeFormController {
     }
 
     public void btnDeleteOnAction(ActionEvent actionEvent) {
-    }
-
-    public void btnSearchOnAction(ActionEvent actionEvent) {
     }
 }

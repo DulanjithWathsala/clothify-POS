@@ -1,4 +1,22 @@
 package org.example.bo.asset;
 
-public interface ProductBo {
+import javafx.collections.ObservableList;
+import org.example.bo.SuperBo;
+import org.example.model.Product;
+
+public interface ProductBo extends SuperBo {
+
+    void addProduct(Product product);
+
+    String generateProductId();
+
+    ObservableList<Product> getAllProducts();
+
+    Product getProductById(String id);
+
+    boolean deleteProduct(String id);
+
+    boolean updateProduct(Product product);
+
+    ObservableList<String> getAllProductIds();
 }

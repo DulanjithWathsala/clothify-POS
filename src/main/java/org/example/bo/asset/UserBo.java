@@ -1,4 +1,27 @@
 package org.example.bo.asset;
 
-public interface UserBo {
+import javafx.collections.ObservableList;
+import org.example.bo.SuperBo;
+import org.example.entitiy.UserEntity;
+import org.example.model.User;
+
+public interface UserBo extends SuperBo {
+
+    UserEntity getUserByEmail(String email);
+
+    void insertUser(User user);
+
+    boolean isValidEmail(String email);
+
+    ObservableList<String> getAllUserIds();
+
+    User getUserById(String id);
+
+    ObservableList<User> getAllUsers();
+
+    boolean updateUser(User user);
+
+    boolean deleteUserById(String id);
+
+    String generateEmployeeId();
 }

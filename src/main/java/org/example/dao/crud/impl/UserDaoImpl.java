@@ -33,6 +33,7 @@ public class UserDaoImpl implements UserDao {
         return userEntity;
     }
 
+    @Override
     public UserEntity searchByEmail(String email){
 
         Session session = HibernateUtil.getSession();
@@ -46,7 +47,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public ObservableList<UserEntity> getAll() {
+    public ObservableList<UserEntity> getAll(){
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
         List<UserEntity> list = session.createQuery("FROM user").list();
@@ -57,7 +58,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void insert(UserEntity userEntity) {
+    public void insert(UserEntity userEntity){
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
         session.persist(userEntity);

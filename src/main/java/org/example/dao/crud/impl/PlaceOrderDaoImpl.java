@@ -49,4 +49,17 @@ public class PlaceOrderDaoImpl implements PlaceOrderDao {
         session.close();
         return i > 0;
     }
+
+    @Override
+    public int getLatestId(){
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+
+        Query query = session.createQuery("SELECT id FROM order_has_items ORDER BY id DESC LIMIT 1");
+        try {
+            return (int) query.uniqueResult(); //returns the ID
+        }catch (NullPointerException e){
+            return 0;
+        }
+    }
 }
