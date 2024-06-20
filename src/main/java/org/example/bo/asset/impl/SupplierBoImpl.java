@@ -8,6 +8,7 @@ import org.example.dao.DaoFactory;
 import org.example.dao.crud.impl.SupplierDaoImpl;
 import org.example.entitiy.SupplierEntity;
 import org.example.model.Supplier;
+import org.example.model.User;
 import org.example.util.DaoType;
 
 public class SupplierBoImpl implements SupplierBo {
@@ -31,6 +32,12 @@ public class SupplierBoImpl implements SupplierBo {
         int number = Integer.parseInt(lastSupplierId.split("S")[1]);
         number++;
         return String.format("S%04d", number);
+    }
+
+    @Override
+    public Supplier getSupplierById(String id){
+        return new ObjectMapper()
+                .convertValue(supplierDao.search(id), Supplier.class);
     }
 
     @Override

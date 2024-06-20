@@ -7,6 +7,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import net.sf.jasperreports.engine.JRException;
 import org.example.bo.asset.impl.UserBoImpl;
@@ -28,7 +29,7 @@ public class ManageEmployeeFormController implements Initializable {
     private Button btnCustomerDetails;
 
     @FXML
-    private Button btnDashboard;
+    private Button btnPlaceOrder;
 
     @FXML
     private Button btnDelete;
@@ -53,6 +54,9 @@ public class ManageEmployeeFormController implements Initializable {
 
     @FXML
     private Button btnUpdate;
+
+    @FXML
+    private Label lblClothify;
 
     @FXML
     private TableView<User> tblEmployee;
@@ -140,8 +144,13 @@ public class ManageEmployeeFormController implements Initializable {
         tblEmployee.setItems(userBo.getAllUsers());
     }
 
-    public void btnDashboardOnAction(ActionEvent actionEvent) throws IOException {
+    @FXML
+    void lblClothifyClickEvent(MouseEvent event) throws IOException {
         sceneSwitch.switchScene(manageEmployeeWindow,"dashboard-form.fxml");
+    }
+
+    public void btnPlaceOrderOnAction(ActionEvent actionEvent) throws IOException {
+        sceneSwitch.switchScene(manageEmployeeWindow,"place-order-form.fxml");
     }
 
     public void btnManageEmployeeOnAction(ActionEvent actionEvent) throws IOException {

@@ -34,7 +34,7 @@ public class CustomerBoImpl implements CustomerBo {
     }
 
     @Override
-    public ObservableList<Customer> getAllCustomer(){
+    public ObservableList<Customer> getAllCustomers(){
         ObservableList<CustomerEntity> customerEntities = customerDaoImpl.getAll();
 
         ObservableList<Customer> customerList = FXCollections.observableArrayList();
@@ -54,7 +54,7 @@ public class CustomerBoImpl implements CustomerBo {
     }
 
     @Override
-    public Customer getUserById(String id){
+    public Customer getCustomerById(String id){
         CustomerEntity customerEntity = customerDaoImpl.search(id);
         return new ObjectMapper().convertValue(customerEntity, Customer.class);
     }

@@ -11,11 +11,11 @@ public interface CustomerBo extends SuperBo {
 
     void insertCustomer(Customer customer);
 
-    ObservableList<Customer> getAllCustomer();
+    ObservableList<Customer> getAllCustomers();
 
     boolean isValidEmail(String email);
 
-    Customer getUserById(String id);
+    Customer getCustomerById(String id);
 
     boolean updateCustomer(Customer customer);
 

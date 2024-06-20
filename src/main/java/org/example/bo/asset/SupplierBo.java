@@ -2,6 +2,7 @@ package org.example.bo.asset;
 
 import javafx.collections.ObservableList;
 import org.example.bo.SuperBo;
+import org.example.entitiy.SupplierEntity;
 import org.example.model.Supplier;
 
 public interface SupplierBo extends SuperBo {
@@ -19,4 +20,6 @@ public interface SupplierBo extends SuperBo {
     boolean deleteSupplierById(String id);
 
     ObservableList<String> getAllSupplierIds();
+
+    Supplier getSupplierById(String id);
 }

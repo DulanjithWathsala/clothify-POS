@@ -20,5 +20,4 @@ public class ProductEntity {
     private int qty;
     private String category;
     private double price;
-    private String supId;
 }

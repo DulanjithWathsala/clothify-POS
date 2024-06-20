@@ -9,7 +9,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="545.0" prefWidth="799.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.DashBoardFormController">
+<AnchorPane fx:id="dashboardWindow" prefHeight="545.0" prefWidth="799.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.controller.DashBoardFormController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="DODGERBLUE" height="546.0" stroke="WHITE" strokeType="INSIDE" width="258.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#a5a8ac" height="59.0" layoutX="258.0" stroke="WHITE" strokeType="INSIDE" width="543.0" />
@@ -18,12 +18,15 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="62.0" layoutY="14.0" text="Clothify" textFill="WHITE">
+      <Label fx:id="lblClothify" layoutX="62.0" layoutY="14.0" onMouseClicked="#lblClothifyMouseClicked" text="Clothify" textFill="WHITE">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Label>
-      <Button fx:id="btnPlaceOrder" layoutX="21.0" layoutY="93.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="216.0" style="-fx-background-color: #4A90E2;" text="Place Order" textFill="WHITE">
+      <Button fx:id="btnPlaceOrder" layoutX="21.0" layoutY="93.0" mnemonicParsing="false" onAction="#btnPlaceOrderOnAction" prefHeight="40.0" prefWidth="216.0" style="-fx-background-color: #4A90E2;" text="Place Order" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -31,7 +34,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btnManageEmployee" layoutX="21.0" layoutY="152.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="216.0" style="-fx-background-color: #4A90E2;" text="Manage Employee" textFill="WHITE">
+      <Button fx:id="btnManageEmployee" layoutX="21.0" layoutY="152.0" mnemonicParsing="false" onAction="#btnManageEmployeeOnAction" prefHeight="40.0" prefWidth="216.0" style="-fx-background-color: #4A90E2;" text="Manage Employee" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -39,7 +42,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btnOrderDetails" layoutX="21.0" layoutY="215.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="216.0" style="-fx-background-color: #4A90E2;" text="Order Details" textFill="WHITE">
+      <Button fx:id="btnOrderDetails" layoutX="21.0" layoutY="215.0" mnemonicParsing="false" onAction="#btnOrderDetailsOnAction" prefHeight="40.0" prefWidth="216.0" style="-fx-background-color: #4A90E2;" text="Manage Orders" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -47,7 +50,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btnProductDetails" layoutX="21.0" layoutY="273.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="216.0" style="-fx-background-color: #4A90E2;" text="Product Details" textFill="WHITE">
+      <Button fx:id="btnProductDetails" layoutX="21.0" layoutY="273.0" mnemonicParsing="false" onAction="#btnProductDetailsOnAction" prefHeight="40.0" prefWidth="216.0" style="-fx-background-color: #4A90E2;" text="Manage Products" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -55,7 +58,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btnCustomerDetails" layoutX="21.0" layoutY="332.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="216.0" style="-fx-background-color: #4A90E2;" text="Customer Details" textFill="WHITE">
+      <Button fx:id="btnCustomerDetails" layoutX="21.0" layoutY="332.0" mnemonicParsing="false" onAction="#btnCustomerDetailsOnAction" prefHeight="40.0" prefWidth="216.0" style="-fx-background-color: #4A90E2;" text="Manage Customers" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -63,7 +66,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <Button fx:id="btnSupplierDetails" layoutX="21.0" layoutY="393.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="216.0" style="-fx-background-color: #4A90E2;" text="Supplier Details" textFill="WHITE">
+      <Button fx:id="btnSupplierDetails" layoutX="21.0" layoutY="393.0" mnemonicParsing="false" onAction="#btnSupplierDetailsOnAction" prefHeight="40.0" prefWidth="216.0" style="-fx-background-color: #4A90E2;" text="Manage Suppliers" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

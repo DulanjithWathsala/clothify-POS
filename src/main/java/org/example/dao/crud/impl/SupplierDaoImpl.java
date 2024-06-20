@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.example.dao.crud.SupplierDao;
 import org.example.entitiy.SupplierEntity;
+import org.example.entitiy.UserEntity;
 import org.example.util.HibernateUtil;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -12,8 +13,15 @@ import java.util.List;
 
 public class SupplierDaoImpl implements SupplierDao {
     @Override
-    public SupplierEntity search(String s) {
-        return null;
+    public SupplierEntity search(String id) {
+        Session session = HibernateUtil.getSession();
+        session.getTransaction();
+
+        Query query = session.createQuery("FROM supplier WHERE id=:id");
+        query.setParameter("id",id);
+        SupplierEntity supplierEntity = (SupplierEntity) query.uniqueResult();
+        session.close();
+        return supplierEntity;
     }
 
     @Override

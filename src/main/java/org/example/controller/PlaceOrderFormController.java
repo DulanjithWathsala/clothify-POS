@@ -1,18 +1,18 @@
 package org.example.controller;
 
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+import java.io.IOException;
 
-public class PlaceOrderFormController implements Initializable {
+public class PlaceOrderFormController {
 
     @FXML
     private Button btnAddToCart;
@@ -21,13 +21,16 @@ public class PlaceOrderFormController implements Initializable {
     private Button btnCustomerDetails;
 
     @FXML
-    private Button btnDashboard;
+    private Button btnFinalizeOrder;
 
     @FXML
     private Button btnManageEmployee;
 
     @FXML
     private Button btnOrderDetails;
+
+    @FXML
+    private Button btnPlaceOrder;
 
     @FXML
     private Button btnProductDetails;
@@ -40,6 +43,12 @@ public class PlaceOrderFormController implements Initializable {
 
     @FXML
     private ComboBox<?> cmbItemId;
+
+    @FXML
+    private Label lblCashier;
+
+    @FXML
+    private Label lblTotal;
 
     @FXML
     private TableView<?> tblCart;
@@ -65,28 +74,54 @@ public class PlaceOrderFormController implements Initializable {
     @FXML
     private TextField txtPrice;
 
+    @FXML
+    private AnchorPane placeOrderWindow;
 
+    private final SceneSwitchController sceneSwitch = SceneSwitchController.getInstance();
 
-    public void btnDashboardOnAction(ActionEvent actionEvent) {
-    }
-
-    public void btnManageEmployeeOnAction(ActionEvent actionEvent) {
-    }
-
-    public void btnOrderDetailsOnAction(ActionEvent actionEvent) {
-    }
-
-    public void btnProductDetailsOnAction(ActionEvent actionEvent) {
-    }
-
-    public void btnCustomerDetailsOnAction(ActionEvent actionEvent) {
-    }
-
-    public void btnSupplierDetailsOnAction(ActionEvent actionEvent) {
-    }
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    @FXML
+    void btnAddToCartOnAction(ActionEvent event) {
 
     }
+
+    @FXML
+    void btnCustomerDetailsOnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(placeOrderWindow,"customer-details-form.fxml");
+    }
+
+    @FXML
+    void btnFinalizeOrderOnAction(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnManageEmployeeOnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(placeOrderWindow,"manage-employee-form.fxml");
+    }
+
+    @FXML
+    void btnOrderDetailsOnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(placeOrderWindow,"order-details-form.fxml");
+    }
+
+    @FXML
+    void btnPlaceOrderOnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(placeOrderWindow,"place-order-form.fxml");
+    }
+
+    @FXML
+    void btnProductDetailsOnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(placeOrderWindow,"product-details-form.fxml");
+    }
+
+    @FXML
+    void btnSupplierDetailsOnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(placeOrderWindow,"supplier-details-form.fxml");
+    }
+
+    @FXML
+    void lblClothifyMouseClicked(MouseEvent event) throws IOException {
+        sceneSwitch.switchScene(placeOrderWindow,"dashboard-form.fxml");
+    }
+
 }
