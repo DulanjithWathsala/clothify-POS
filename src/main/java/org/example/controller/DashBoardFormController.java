@@ -10,26 +10,6 @@ import javafx.scene.layout.AnchorPane;
 import java.io.IOException;
 
 public class DashBoardFormController {
-    @FXML
-    private Button btnCustomerDetails;
-
-    @FXML
-    private Button btnManageEmployee;
-
-    @FXML
-    private Button btnOrderDetails;
-
-    @FXML
-    private Button btnPlaceOrder;
-
-    @FXML
-    private Button btnProductDetails;
-
-    @FXML
-    private Button btnSupplierDetails;
-
-    @FXML
-    private Label lblClothify;
 
     @FXML
     private AnchorPane dashboardWindow;

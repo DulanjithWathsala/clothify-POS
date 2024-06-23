@@ -24,4 +24,6 @@ public interface UserBo extends SuperBo {
     boolean deleteUserById(String id);
 
     String generateEmployeeId();
+    
+    boolean checkIfUserPasswordMatches(String name, String password);
 }

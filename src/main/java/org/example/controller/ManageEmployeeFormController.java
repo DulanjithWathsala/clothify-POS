@@ -26,42 +26,6 @@ import java.util.ResourceBundle;
 public class ManageEmployeeFormController implements Initializable {
 
     @FXML
-    private Button btnAdd;
-
-    @FXML
-    private Button btnCustomerDetails;
-
-    @FXML
-    private Button btnPlaceOrder;
-
-    @FXML
-    private Button btnDelete;
-
-    @FXML
-    private Button btnAction;
-
-    @FXML
-    private Button btnClear;
-
-    @FXML
-    private Button btnManageEmployee;
-
-    @FXML
-    private Button btnOrderDetails;
-
-    @FXML
-    private Button btnProductDetails;
-
-    @FXML
-    private Button btnSupplierDetails;
-
-    @FXML
-    private Button btnUpdate;
-
-    @FXML
-    private Label lblClothify;
-
-    @FXML
     private TableView<User> tblEmployee;
 
     @FXML
@@ -94,8 +58,6 @@ public class ManageEmployeeFormController implements Initializable {
 
     private final UserBo userBo;
 
-    private String currentId;
-
     private final SceneSwitchController sceneSwitch;
 
     public ManageEmployeeFormController() {
@@ -105,8 +67,6 @@ public class ManageEmployeeFormController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        txtEmployeeId.setEditable(false);
-        loadEmployeeId();
 
         colEmployeeId.setCellValueFactory(new PropertyValueFactory<>("id"));
         colEmployeeName.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -115,27 +75,6 @@ public class ManageEmployeeFormController implements Initializable {
         loadEmployeeTbl();
     }
 
-    public void btnAddOnAction(ActionEvent actionEvent){
-        String email = txtEmployeeEmail.getText();
-        if (userBo.isValidEmail(email)){
-            User user = new User(
-                    currentId,
-                    txtEmployeeName.getText(),
-                    email,
-                    txtEmployeeAddress.getText()
-            );
-
-            userBo.insertUser(user);
-
-            new Alert(Alert.AlertType.INFORMATION, "Employee Added Successfully").show();
-
-            clearTextFields();
-            loadEmployeeId();
-            loadEmployeeTbl();
-        } else {
-            new Alert(Alert.AlertType.ERROR, "Invalid Email. Try again...").show();
-        }
-    }
 
     private void clearTextFields(){
         txtEmployeeName.setText("");
@@ -143,10 +82,6 @@ public class ManageEmployeeFormController implements Initializable {
         txtEmployeeAddress.setText("");
     }
 
-    private void loadEmployeeId(){
-        currentId = userBo.generateEmployeeId();
-        txtEmployeeId.setText(currentId);
-    }
 
     private void loadEmployeeTbl(){
         tblEmployee.setItems(userBo.getAllUsers());
@@ -223,13 +158,5 @@ public class ManageEmployeeFormController implements Initializable {
 
     public void btnClearOnAction(ActionEvent actionEvent) {
         clearTextFields();
-    }
-
-    public void btnActionOnAction(ActionEvent actionEvent) {
-        txtEmployeeId.setEditable(true);
-        txtEmployeeId.setText("");
-        btnAdd.setVisible(false);
-        btnClear.setVisible(false);
-        btnAction.setVisible(false);
     }
 }

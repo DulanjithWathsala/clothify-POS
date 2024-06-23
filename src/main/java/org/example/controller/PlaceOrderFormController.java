@@ -14,6 +14,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
+import lombok.Setter;
 import org.example.bo.BoFactory;
 import org.example.bo.asset.CustomerBo;
 import org.example.bo.asset.PlaceOrderBo;
@@ -35,37 +36,11 @@ import java.util.ResourceBundle;
 public class PlaceOrderFormController implements Initializable {
 
     @FXML
-    private Button btnAddToCart;
-
-    @FXML
-    private Button btnCustomerDetails;
-
-    @FXML
-    private Button btnFinalizeOrder;
-
-    @FXML
-    private Button btnManageEmployee;
-
-    @FXML
-    private Button btnOrderDetails;
-
-    @FXML
-    private Button btnPlaceOrder;
-
-    @FXML
-    private Button btnProductDetails;
-
-    @FXML
-    private Button btnSupplierDetails;
-
-    @FXML
     private ComboBox<String> cmbCustomerId;
 
     @FXML
     private ComboBox<String> cmbItemId;
 
-    @FXML
-    private Label lblCashier;
 
     @FXML
     private Label lblTotal;

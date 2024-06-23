@@ -102,22 +102,12 @@
       <TextField fx:id="txtItemName" layoutX="556.0" layoutY="137.0" prefHeight="26.0" prefWidth="178.0" promptText="Item name" />
       <TextField fx:id="txtItemQty" layoutX="556.0" layoutY="182.0" onKeyTyped="#txtQtyKeyTypedEvent" prefHeight="26.0" prefWidth="178.0" promptText="Qty" />
       <TextField fx:id="txtPrice" layoutX="556.0" layoutY="225.0" prefHeight="26.0" prefWidth="178.0" promptText="Item Price" />
-      <Label layoutX="556.0" layoutY="268.0" prefHeight="20.0" prefWidth="56.0" text="Total    :">
+      <Label layoutX="556.0" layoutY="288.0" prefHeight="20.0" prefWidth="56.0" text="Total    :">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lblTotal" layoutX="625.0" layoutY="268.0" prefHeight="20.0" prefWidth="109.0" text="0.00" textAlignment="CENTER" textFill="RED">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="552.0" layoutY="310.0" prefHeight="20.0" prefWidth="62.0" text="Cashier :">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label fx:id="lblCashier" layoutX="625.0" layoutY="310.0" prefHeight="20.0" prefWidth="109.0" text="abc" textAlignment="CENTER" textFill="RED">
+      <Label fx:id="lblTotal" layoutX="625.0" layoutY="288.0" prefHeight="20.0" prefWidth="109.0" text="0.00" textAlignment="CENTER" textFill="RED">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>

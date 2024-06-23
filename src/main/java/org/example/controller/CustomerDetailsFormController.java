@@ -31,30 +31,6 @@ public class CustomerDetailsFormController implements Initializable {
     private Button btnClear;
 
     @FXML
-    private Button btnCustomerDetails;
-
-    @FXML
-    private Button btnDelete;
-
-    @FXML
-    private Button btnManageEmployee;
-
-    @FXML
-    private Button btnOrderDetails;
-
-    @FXML
-    private Button btnPlaceOrder;
-
-    @FXML
-    private Button btnProductDetails;
-
-    @FXML
-    private Button btnSupplierDetails;
-
-    @FXML
-    private Button btnUpdate;
-
-    @FXML
     private TableColumn<?, ?> colCustomerAddress;
 
     @FXML
@@ -65,9 +41,6 @@ public class CustomerDetailsFormController implements Initializable {
 
     @FXML
     private TableColumn<?, ?> colCustomerName;
-
-    @FXML
-    private Label lblClothify;
 
     @FXML
     private TableView<Customer> tblCustomer;

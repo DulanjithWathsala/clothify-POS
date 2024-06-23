@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.example.bo.asset.UserBo;
 import org.example.dao.DaoFactory;
+import org.example.dao.crud.UserDao;
 import org.example.dao.crud.impl.UserDaoImpl;
 import org.example.entitiy.UserEntity;
 import org.example.model.User;
@@ -12,7 +13,7 @@ import org.example.util.DaoType;
 
 public class UserBoImpl implements UserBo {
 
-    private final UserDaoImpl userDaoImpl;
+    private final UserDao userDaoImpl;
 
     public UserBoImpl() {
         this.userDaoImpl = DaoFactory.getInstance().getDao(DaoType.USER);
@@ -88,5 +89,10 @@ public class UserBoImpl implements UserBo {
         int number = Integer.parseInt(lastEmployeeId.split("U")[1]);
         number++;
         return String.format("U%04d", number);
+    }
+
+    @Override
+    public boolean checkIfUserPasswordMatches(String name, String password) {
+        return userDaoImpl.isUserPasswordMatches(name, password);
     }
 }

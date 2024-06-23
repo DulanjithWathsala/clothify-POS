@@ -31,30 +31,6 @@ public class SupplierDetailsFormController implements Initializable {
     private Button btnClear;
 
     @FXML
-    private Button btnCustomerDetails;
-
-    @FXML
-    private Button btnDelete;
-
-    @FXML
-    private Button btnManageEmployee;
-
-    @FXML
-    private Button btnOrderDetails;
-
-    @FXML
-    private Button btnPlaceOrder;
-
-    @FXML
-    private Button btnProductDetails;
-
-    @FXML
-    private Button btnSupplierDetails;
-
-    @FXML
-    private Button btnUpdate;
-
-    @FXML
     private TableColumn<?, ?> colSupplierCompany;
 
     @FXML
@@ -65,9 +41,6 @@ public class SupplierDetailsFormController implements Initializable {
 
     @FXML
     private TableColumn<?, ?> colSupplierName;
-
-    @FXML
-    private Label lblClothify;
 
     @FXML
     private TableView<Supplier> tblSupplier;

@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.example.bo.asset.CustomerBo;
 import org.example.dao.DaoFactory;
+import org.example.dao.crud.CustomerDao;
 import org.example.dao.crud.impl.CustomerDaoImpl;
 import org.example.entitiy.CustomerEntity;
 import org.example.model.Customer;
@@ -12,7 +13,7 @@ import org.example.util.DaoType;
 
 public class CustomerBoImpl implements CustomerBo {
 
-    private final CustomerDaoImpl customerDaoImpl;
+    private final CustomerDao customerDaoImpl;
 
     public CustomerBoImpl() {
         this.customerDaoImpl = DaoFactory.getInstance().getDao(DaoType.CUSTOMER);

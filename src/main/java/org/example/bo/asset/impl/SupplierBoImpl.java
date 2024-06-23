@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.example.bo.asset.SupplierBo;
 import org.example.dao.DaoFactory;
+import org.example.dao.crud.SupplierDao;
 import org.example.dao.crud.impl.SupplierDaoImpl;
 import org.example.entitiy.SupplierEntity;
 import org.example.model.Supplier;
@@ -13,7 +14,7 @@ import org.example.util.DaoType;
 
 public class SupplierBoImpl implements SupplierBo {
 
-    private final SupplierDaoImpl supplierDao;
+    private final SupplierDao supplierDao;
 
     public SupplierBoImpl() {
         this.supplierDao = DaoFactory.getInstance().getDao(DaoType.SUPPLIER);

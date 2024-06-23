@@ -8,4 +8,6 @@ public interface UserDao extends CrudDao<UserEntity, String> {
     UserEntity searchByEmail(String email);
 
     String getLatestId();
+
+    boolean isUserPasswordMatches(String name, String password);
 }

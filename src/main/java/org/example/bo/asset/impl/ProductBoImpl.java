@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.example.bo.asset.ProductBo;
 import org.example.dao.DaoFactory;
+import org.example.dao.crud.ProductDao;
 import org.example.dao.crud.impl.ProductDaoImpl;
 import org.example.entitiy.ProductEntity;
 import org.example.model.Product;
@@ -12,7 +13,7 @@ import org.example.util.DaoType;
 
 public class ProductBoImpl implements ProductBo {
 
-    private final ProductDaoImpl productDaoImpl;
+    private final ProductDao productDaoImpl;
 
     public ProductBoImpl() {
         this.productDaoImpl = DaoFactory.getInstance().getDao(DaoType.PRODUCT);

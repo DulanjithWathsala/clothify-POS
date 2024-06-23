@@ -28,15 +28,7 @@
             <Font name="System Bold" size="11.0" />
          </font>
       </Button>
-      <Button fx:id="btnAction" layoutX="590.0" layoutY="218.0" mnemonicParsing="false" onAction="#btnActionOnAction" prefHeight="26.0" prefWidth="102.0" style="-fx-background-color: #0411C3;" text="Action" textFill="WHITE">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
-      <Button fx:id="btnClear" layoutX="590.0" layoutY="171.0" mnemonicParsing="false" onAction="#btnClearOnAction" prefHeight="26.0" prefWidth="102.0" style="-fx-background-color: #BBC501;" text="Clear" textFill="WHITE">
+      <Button fx:id="btnClear" layoutX="590.0" layoutY="122.0" mnemonicParsing="false" onAction="#btnClearOnAction" prefHeight="26.0" prefWidth="102.0" style="-fx-background-color: #BBC501;" text="Clear" textFill="WHITE">
          <cursor>
             <Cursor fx:constant="HAND" />
          </cursor>
@@ -111,14 +103,6 @@
       <TextField fx:id="txtEmployeeName" layoutX="310.0" layoutY="122.0" prefHeight="26.0" prefWidth="230.0" promptText="Employee Name" />
       <TextField fx:id="txtEmployeeEmail" layoutX="310.0" layoutY="171.0" prefHeight="26.0" prefWidth="230.0" promptText="Email" />
       <TextField fx:id="txtEmployeeAddress" layoutX="310.0" layoutY="218.0" prefHeight="26.0" prefWidth="230.0" promptText="Address" />
-      <Button fx:id="btnAdd" layoutX="590.0" layoutY="123.0" mnemonicParsing="false" onAction="#btnAddOnAction" prefHeight="26.0" prefWidth="102.0" style="-fx-background-color: #00AA0A;" text="Add" textFill="WHITE">
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <font>
-            <Font name="System Bold" size="12.0" />
-         </font>
-      </Button>
       <TableView fx:id="tblEmployee" layoutX="285.0" layoutY="264.0" prefHeight="266.0" prefWidth="493.0">
         <columns>
           <TableColumn fx:id="colEmployeeId" prefWidth="67.20001220703125" text="ID" />
