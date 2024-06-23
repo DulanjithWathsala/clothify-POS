@@ -12,7 +12,11 @@ import org.example.util.DaoType;
 
 public class ProductBoImpl implements ProductBo {
 
-    private final ProductDaoImpl productDaoImpl = DaoFactory.getInstance().getDao(DaoType.PRODUCT);
+    private final ProductDaoImpl productDaoImpl;
+
+    public ProductBoImpl() {
+        this.productDaoImpl = DaoFactory.getInstance().getDao(DaoType.PRODUCT);
+    }
 
     @Override
     public void addProduct(Product product){

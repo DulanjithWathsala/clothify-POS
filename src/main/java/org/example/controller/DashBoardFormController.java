@@ -34,7 +34,11 @@ public class DashBoardFormController {
     @FXML
     private AnchorPane dashboardWindow;
 
-    private final SceneSwitchController sceneSwitch = SceneSwitchController.getInstance();
+    private final SceneSwitchController sceneSwitch;
+    public DashBoardFormController() {
+        this.sceneSwitch = SceneSwitchController.getInstance();
+
+    }
 
     @FXML
     void btnCustomerDetailsOnAction(ActionEvent event) throws IOException {

@@ -15,8 +15,6 @@ public class Order {
 
     private String id;
     private String cusId;
-    private String status;
     private Date date;
     private Double amount;
-    private String empId;
 }

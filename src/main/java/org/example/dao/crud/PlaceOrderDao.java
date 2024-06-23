@@ -1,9 +1,9 @@
 package org.example.dao.crud;
 
 import org.example.dao.CrudDao;
-import org.example.entitiy.OrderHasItemEntity;
+import org.example.entitiy.OrderEntity;
 
-public interface PlaceOrderDao extends CrudDao<OrderHasItemEntity, Integer> {
+public interface PlaceOrderDao extends CrudDao<OrderEntity, String> {
 
-    int getLatestId();
+    String getLatestOrderId();
 }

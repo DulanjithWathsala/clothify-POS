@@ -7,9 +7,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import org.example.bo.BoFactory;
+import org.example.bo.asset.CustomerBo;
 import org.example.bo.asset.impl.CustomerBoImpl;
 import org.example.model.Customer;
 import org.example.model.User;
+import org.example.util.BoType;
 
 import java.io.IOException;
 import java.net.URL;
@@ -86,9 +89,14 @@ public class CustomerDetailsFormController implements Initializable {
 
     private String currentId;
 
-    private final CustomerBoImpl customerBo = new CustomerBoImpl();
+    private final CustomerBo customerBo;
 
-    private final SceneSwitchController sceneSwitch = SceneSwitchController.getInstance();
+    private final SceneSwitchController sceneSwitch;
+
+    public CustomerDetailsFormController() {
+        this.customerBo = BoFactory.getInstance().getBo(BoType.CUSTOMER);
+        this.sceneSwitch = SceneSwitchController.getInstance();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

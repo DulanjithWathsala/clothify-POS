@@ -11,9 +11,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class Cart {
 
-    private Integer idF;
-    private String proIdF;
-    private String proNameF;
-    private Integer qtyF;
-    private Double amountF;
+    private Integer id;
+    private String name;
+    private Double price;
+    private Integer qty;
+    private Double Total;
 }

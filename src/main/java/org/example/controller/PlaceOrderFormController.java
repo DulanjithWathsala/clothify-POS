@@ -1,18 +1,38 @@
 package org.example.controller;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.util.Duration;
+import org.example.bo.BoFactory;
+import org.example.bo.asset.CustomerBo;
+import org.example.bo.asset.PlaceOrderBo;
+import org.example.bo.asset.ProductBo;
+import org.example.model.Cart;
+import org.example.model.Customer;
+import org.example.model.Order;
+import org.example.model.Product;
+import org.example.util.BoType;
 
 import java.io.IOException;
+import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
+import java.util.Date;
+import java.util.Optional;
+import java.util.ResourceBundle;
 
-public class PlaceOrderFormController {
+public class PlaceOrderFormController implements Initializable {
 
     @FXML
     private Button btnAddToCart;
@@ -39,10 +59,10 @@ public class PlaceOrderFormController {
     private Button btnSupplierDetails;
 
     @FXML
-    private ComboBox<?> cmbCustomerId;
+    private ComboBox<String> cmbCustomerId;
 
     @FXML
-    private ComboBox<?> cmbItemId;
+    private ComboBox<String> cmbItemId;
 
     @FXML
     private Label lblCashier;
@@ -51,7 +71,7 @@ public class PlaceOrderFormController {
     private Label lblTotal;
 
     @FXML
-    private TableView<?> tblCart;
+    private TableView<Cart> tblCart;
 
     @FXML
     private TextField txtCustomerAddress;
@@ -75,13 +95,112 @@ public class PlaceOrderFormController {
     private TextField txtPrice;
 
     @FXML
+    private TableColumn<?, ?> colId;
+
+    @FXML
+    private TableColumn<?, ?> colName;
+
+    @FXML
+    private TableColumn<?, ?> colQty;
+
+    @FXML
+    private TableColumn<?, ?> colTotal;
+
+    @FXML
+    private TableColumn<?, ?> colUnitPrice;
+
+    @FXML
+    private Label lblDate;
+
+    @FXML
+    private Label lblTime;
+
+    @FXML
     private AnchorPane placeOrderWindow;
 
-    private final SceneSwitchController sceneSwitch = SceneSwitchController.getInstance();
+    private final SceneSwitchController sceneSwitch;
+
+    private final ProductBo productBo;
+
+    private final CustomerBo customerBo;
+
+    private final PlaceOrderBo placeOrderBo;
+
+    private int cartId;
+
+    private double total;
+
+    private final ObservableList<Cart> cartList = FXCollections.observableArrayList();
+
+    public PlaceOrderFormController() {
+        this.sceneSwitch = SceneSwitchController.getInstance();
+        this.productBo = BoFactory.getInstance().getBo(BoType.PRODUCT);
+        this.customerBo = BoFactory.getInstance().getBo(BoType.CUSTOMER);
+        this.placeOrderBo = BoFactory.getInstance().getBo(BoType.PLACEORDER);
+        this.cartId = 1;
+        this.total = 0;
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        loadDateTime();
+        txtOrderId.setEditable(false);
+        txtCustomerName.setEditable(false);
+        txtCustomerEmail.setEditable(false);
+        txtCustomerAddress.setEditable(false);
+        txtItemName.setEditable(false);
+        txtPrice.setEditable(false);
+
+        colId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colName.setCellValueFactory(new PropertyValueFactory<>("name"));
+        colUnitPrice.setCellValueFactory(new PropertyValueFactory<>("price"));
+        colQty.setCellValueFactory(new PropertyValueFactory<>("qty"));
+        colTotal.setCellValueFactory(new PropertyValueFactory<>("total"));
+
+        cmbCustomerId.setItems(customerBo.getAllCustomerIds());
+        cmbItemId.setItems(productBo.getAllProductIds());
+
+        txtOrderId.setText(placeOrderBo.generateOrderId());
+    }
 
     @FXML
     void btnAddToCartOnAction(ActionEvent event) {
+        double unitPrice = Double.parseDouble(txtPrice.getText());
+        int qty = Integer.parseInt(txtItemQty.getText());
+        total += (unitPrice * qty);
+        Cart cart = new Cart(
+                cartId++,
+                txtItemName.getText(),
+                 unitPrice,
+                qty,
+                (unitPrice * qty)
+        );
+        lblTotal.setText(String.valueOf(total));
+        cartList.add(cart);
+        tblCart.setItems(cartList);
+    }
 
+    @FXML
+    void cmbCustomerIdOnAction(ActionEvent event) {
+        cartId = 1;
+        lblTotal.setText("0.00");
+        Customer customer = customerBo.getCustomerById(cmbCustomerId.getValue());
+        txtCustomerName.setText(customer.getName());
+        txtCustomerEmail.setText(customer.getEmail());
+        txtCustomerAddress.setText(customer.getAddress());
+        tblCart.getItems().clear();
+    }
+
+    @FXML
+    void cmbItemIdOnAction(ActionEvent event) {
+        Product product = productBo.getProductById(cmbItemId.getValue());
+        txtItemName.setText(product.getName());
+        txtPrice.setText(String.valueOf(product.getPrice()));
+    }
+
+
+    @FXML
+    void txtQtyKeyTypedEvent(KeyEvent event) {
     }
 
     @FXML
@@ -91,7 +210,38 @@ public class PlaceOrderFormController {
 
     @FXML
     void btnFinalizeOrderOnAction(ActionEvent event) {
+        System.out.println(cmbCustomerId.getValue());
+        Order order = new Order(
+                txtOrderId.getText(),
+                cmbCustomerId.getValue(),
+                new Date(),
+                Double.parseDouble(lblTotal.getText())
+        );
 
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Finalize order?");
+        Optional<ButtonType> result = alert.showAndWait();
+        // Check if the response was OK or Cancel
+        if (result.isPresent() && result.get() == ButtonType.OK) {
+            placeOrderBo.saveOrder(order);
+            new Alert(Alert.AlertType.INFORMATION, "Order placed Successfully").show();
+        }
+    }
+
+    private void loadDateTime() {
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        lblDate.setText(format.format(date));
+
+        Timeline timeline = new Timeline(new KeyFrame(Duration.ZERO, e -> {
+            LocalTime localTime = LocalTime.now();
+            lblTime.setText(
+                    localTime.getHour()+" : "+localTime.getMinute()+" : "+localTime.getSecond()
+            );
+        }),
+                new KeyFrame(Duration.seconds(1))
+        );
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
     }
 
     @FXML
@@ -123,5 +273,4 @@ public class PlaceOrderFormController {
     void lblClothifyMouseClicked(MouseEvent event) throws IOException {
         sceneSwitch.switchScene(placeOrderWindow,"dashboard-form.fxml");
     }
-
 }

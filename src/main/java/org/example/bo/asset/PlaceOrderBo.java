@@ -1,18 +1,24 @@
 package org.example.bo.asset;
 
+
+
 import javafx.collections.ObservableList;
 import org.example.bo.SuperBo;
-import org.example.model.Product;
+import org.example.entitiy.OrderEntity;
+import org.example.model.Order;
+
 
 public interface PlaceOrderBo extends SuperBo {
 
-    ObservableList<String> getProductIds();
-
-    Product getProductById(String id);
-
-    ObservableList<Product> getAllProducts();
-
     String generateOrderId();
 
-    int getLatestCartId();
+    void saveOrder(Order order);
+
+    ObservableList<OrderEntity> getAllOrders();
+
+    boolean deleteOrderById(String id);
+
+    Order getOrderById(String orderId);
+
+    String getLatestOrderId();
 }

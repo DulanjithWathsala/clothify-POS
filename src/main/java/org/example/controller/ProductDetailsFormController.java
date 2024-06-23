@@ -6,10 +6,13 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import org.example.bo.BoFactory;
+import org.example.bo.asset.ProductBo;
 import org.example.bo.asset.impl.ProductBoImpl;
 import org.example.model.Product;
 import javafx.scene.layout.AnchorPane;
 import org.example.model.User;
+import org.example.util.BoType;
 
 import java.io.IOException;
 import java.net.URL;
@@ -87,11 +90,16 @@ public class ProductDetailsFormController implements Initializable {
     @FXML
     private AnchorPane productsWindow;
 
-    private final ProductBoImpl productBo = new ProductBoImpl();
+    private final ProductBo productBo;
 
     private String currentId;
 
-    private final SceneSwitchController sceneSwitch = SceneSwitchController.getInstance();
+    private final SceneSwitchController sceneSwitch;
+
+    public ProductDetailsFormController() {
+        this.productBo = BoFactory.getInstance().getBo(BoType.PRODUCT);
+        this.sceneSwitch = SceneSwitchController.getInstance();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

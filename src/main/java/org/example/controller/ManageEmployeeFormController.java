@@ -10,8 +10,11 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import net.sf.jasperreports.engine.JRException;
+import org.example.bo.BoFactory;
+import org.example.bo.asset.UserBo;
 import org.example.bo.asset.impl.UserBoImpl;
 import org.example.model.User;
+import org.example.util.BoType;
 
 import java.io.IOException;
 import java.net.URL;
@@ -89,11 +92,16 @@ public class ManageEmployeeFormController implements Initializable {
     @FXML
     private AnchorPane manageEmployeeWindow;
 
-    private final UserBoImpl userBo = new UserBoImpl();
+    private final UserBo userBo;
 
     private String currentId;
 
-    private final SceneSwitchController sceneSwitch = SceneSwitchController.getInstance();
+    private final SceneSwitchController sceneSwitch;
+
+    public ManageEmployeeFormController() {
+        this.sceneSwitch = SceneSwitchController.getInstance();
+        this.userBo = BoFactory.getInstance().getBo(BoType.USER);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

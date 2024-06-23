@@ -12,7 +12,11 @@ import org.example.util.DaoType;
 
 public class UserBoImpl implements UserBo {
 
-    private final UserDaoImpl userDaoImpl = DaoFactory.getInstance().getDao(DaoType.USER);
+    private final UserDaoImpl userDaoImpl;
+
+    public UserBoImpl() {
+        this.userDaoImpl = DaoFactory.getInstance().getDao(DaoType.USER);
+    }
 
     @Override
     public void insertUser(User user){

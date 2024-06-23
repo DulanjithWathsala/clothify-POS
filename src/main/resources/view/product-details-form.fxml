@@ -51,40 +51,61 @@
             <Font name="System Bold" size="24.0" />
          </font>
       </Label>
-      <Label layoutX="62.0" layoutY="14.0" onMouseClicked="#lblCLothifyMouseClicked" text="Clothify" textFill="WHITE">
+      <Label layoutX="62.0" layoutY="14.0" onMouseClicked="#lblCLothifyMouseClicked" style="-fx-border-color: black; -fx-padding: 5px; -fx-border-radius: 10px;" text="Clothify">
          <font>
             <Font name="System Bold" size="36.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Label>
       <Button fx:id="btnPlaceOrder" layoutX="21.0" layoutY="93.0" mnemonicParsing="false" onAction="#btnPlaceOrderOnAction" prefHeight="40.0" prefWidth="216.0" style="-fx-background-color: #4A90E2;" text=" Place Order" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="btnManageEmployee" layoutX="21.0" layoutY="152.0" mnemonicParsing="false" onAction="#btnManageEmployeeOnAction" prefHeight="40.0" prefWidth="216.0" style="-fx-background-color: #4A90E2;" text="Manage Employee" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="btnOrderDetails" layoutX="21.0" layoutY="215.0" mnemonicParsing="false" onAction="#btnOrderDetailsOnAction" prefHeight="40.0" prefWidth="216.0" style="-fx-background-color: #4A90E2;" text="Manage Orders" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="btnProductDetails" layoutX="21.0" layoutY="273.0" mnemonicParsing="false" onAction="#btnProductDetailsOnAction" prefHeight="40.0" prefWidth="216.0" style="-fx-background-color: #4A90E2;" text="Manage Products" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="btnCustomerDetails" layoutX="21.0" layoutY="332.0" mnemonicParsing="false" onAction="#btnCustomerDetailsOnAction" prefHeight="40.0" prefWidth="216.0" style="-fx-background-color: #4A90E2;" text="Manage Customers" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="btnSupplierDetails" layoutX="21.0" layoutY="393.0" mnemonicParsing="false" onAction="#btnSupplierDetailsOnAction" prefHeight="40.0" prefWidth="216.0" style="-fx-background-color: #4A90E2;" text="Manage Suppliers" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <TextField fx:id="txtItemId" layoutX="373.0" layoutY="82.0" prefHeight="26.0" prefWidth="108.0" promptText="Item ID" />
       <TextField fx:id="txtItemName" layoutX="298.0" layoutY="128.0" prefHeight="26.0" prefWidth="182.0" promptText="Item Name" />

@@ -12,7 +12,11 @@ import org.example.util.DaoType;
 
 public class CustomerBoImpl implements CustomerBo {
 
-    private final CustomerDaoImpl customerDaoImpl = DaoFactory.getInstance().getDao(DaoType.CUSTOMER);
+    private final CustomerDaoImpl customerDaoImpl;
+
+    public CustomerBoImpl() {
+        this.customerDaoImpl = DaoFactory.getInstance().getDao(DaoType.CUSTOMER);
+    }
 
     @Override
     public String generateCustomerId(){

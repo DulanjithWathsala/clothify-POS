@@ -7,9 +7,12 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import org.example.bo.BoFactory;
+import org.example.bo.asset.SupplierBo;
 import org.example.bo.asset.impl.SupplierBoImpl;
 import org.example.model.Supplier;
 import org.example.model.User;
+import org.example.util.BoType;
 
 import java.io.IOException;
 import java.net.URL;
@@ -84,11 +87,16 @@ public class SupplierDetailsFormController implements Initializable {
     @FXML
     private AnchorPane supplierWindow;
 
-    private final SceneSwitchController sceneSwitch = SceneSwitchController.getInstance();
+    private final SceneSwitchController sceneSwitch;
 
     private String currentId;
 
-    private final SupplierBoImpl supplierBo = new SupplierBoImpl();
+    private final SupplierBo supplierBo;
+
+    public SupplierDetailsFormController() {
+        this.sceneSwitch = SceneSwitchController.getInstance();
+        this.supplierBo = BoFactory.getInstance().getBo(BoType.SUPPLIER);
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

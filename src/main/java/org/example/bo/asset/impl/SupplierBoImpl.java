@@ -13,7 +13,11 @@ import org.example.util.DaoType;
 
 public class SupplierBoImpl implements SupplierBo {
 
-    private final SupplierDaoImpl supplierDao = DaoFactory.getInstance().getDao(DaoType.SUPPLIER);
+    private final SupplierDaoImpl supplierDao;
+
+    public SupplierBoImpl() {
+        this.supplierDao = DaoFactory.getInstance().getDao(DaoType.SUPPLIER);
+    }
 
     @Override
     public boolean isValidEmail(String email){
