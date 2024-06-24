@@ -94,24 +94,28 @@ public class CustomerDetailsFormController implements Initializable {
 
     @FXML
     void btnAddOnAction(ActionEvent event) {
-        String email = txtCustomerEmail.getText();
-        if (customerBo.isValidEmail(email)){
-            Customer customer = new Customer(
-                    currentId,
-                    txtCustomerName.getText(),
-                    email,
-                    txtCustomerAddress.getText()
-            );
+        if (!areTextFieldsEmpty()) {
+            String email = txtCustomerEmail.getText();
+            if (customerBo.isValidEmail(email)){
+                Customer customer = new Customer(
+                        currentId,
+                        txtCustomerName.getText(),
+                        email,
+                        txtCustomerAddress.getText()
+                );
 
-            customerBo.insertCustomer(customer);
+                customerBo.insertCustomer(customer);
 
-            new Alert(Alert.AlertType.INFORMATION, "Customer Added Successfully").show();
+                new Alert(Alert.AlertType.INFORMATION, "Customer Added Successfully").show();
 
-            clearTextFields();
-            loadCustomerId();
-            loadCustomerTbl();
+                clearTextFields();
+                loadCustomerId();
+                loadCustomerTbl();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Invalid Email. Try again...").show();
+            }
         } else {
-            new Alert(Alert.AlertType.ERROR, "Invalid Email. Try again...").show();
+            new Alert(Alert.AlertType.ERROR, "Input fields can't be empty!").show();
         }
     }
 
@@ -122,18 +126,22 @@ public class CustomerDetailsFormController implements Initializable {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to proceed?");
-        Optional<ButtonType> result = alert.showAndWait();
-        // Check if the response was OK or Cancel
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            if (customerBo.deleteCustomerById(txtCustomerId.getText())) {
-                new Alert(Alert.AlertType.INFORMATION, "Customer Deleted Successfully").show();
-            }else {
-                new Alert(Alert.AlertType.ERROR, "Delete failed. Try again...").show();
+        if (!areTextFieldsEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to proceed?");
+            Optional<ButtonType> result = alert.showAndWait();
+            // Check if the response was OK or Cancel
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                if (customerBo.deleteCustomerById(txtCustomerId.getText())) {
+                    new Alert(Alert.AlertType.INFORMATION, "Customer Deleted Successfully").show();
+                }else {
+                    new Alert(Alert.AlertType.ERROR, "Delete failed. Try again...").show();
+                }
             }
+            loadCustomerTbl();
+            clearTextFields();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Input fields can't be empty!").show();
         }
-        loadCustomerTbl();
-        clearTextFields();
     }
 
     private void clearTextFields(){
@@ -183,32 +191,43 @@ public class CustomerDetailsFormController implements Initializable {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
-        Customer customer = customerBo.getCustomerById(txtCustomerId.getText());
+        if (!areTextFieldsEmpty()) {
+            Customer customer = customerBo.getCustomerById(txtCustomerId.getText());
 
-        if (customer != null){
-            customer.setName(txtCustomerName.getText());
-            customer.setAddress(txtCustomerAddress.getText());
-            customer.setEmail(txtCustomerEmail.getText());
+            if (customer != null){
+                customer.setName(txtCustomerName.getText());
+                customer.setAddress(txtCustomerAddress.getText());
+                customer.setEmail(txtCustomerEmail.getText());
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to proceed?");
-            Optional<ButtonType> result = alert.showAndWait();
-            // Check if the response was OK or Cancel
-            if (result.isPresent() && result.get() == ButtonType.OK) {
-                if (customerBo.updateCustomer(customer)) {
-                    new Alert(Alert.AlertType.INFORMATION, "Customer Updated Successfully").show();
-                }else {
-                    new Alert(Alert.AlertType.ERROR, "Update failed. Try again...").show();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to proceed?");
+                Optional<ButtonType> result = alert.showAndWait();
+                // Check if the response was OK or Cancel
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    if (customerBo.updateCustomer(customer)) {
+                        new Alert(Alert.AlertType.INFORMATION, "Customer Updated Successfully").show();
+                    }else {
+                        new Alert(Alert.AlertType.ERROR, "Update failed. Try again...").show();
+                    }
                 }
+            }else {
+                new Alert(Alert.AlertType.WARNING, "Customer does not exists...").show();
             }
-        }else {
-            new Alert(Alert.AlertType.WARNING, "Customer does not exists...").show();
+            loadCustomerTbl();
+            clearTextFields();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Input fields can't be empty!").show();
         }
-        loadCustomerTbl();
-        clearTextFields();
     }
 
     @FXML
     void lblClothifyMouseClicked(MouseEvent event) throws IOException {
         sceneSwitch.switchScene(customerWindow,"dashboard-form.fxml");
+    }
+
+    private boolean areTextFieldsEmpty() {
+        return txtCustomerId.getText().isEmpty() &&
+                txtCustomerName.getText().isEmpty() &&
+                txtCustomerEmail.getText().isEmpty() &&
+                txtCustomerAddress.getText().isEmpty();
     }
 }

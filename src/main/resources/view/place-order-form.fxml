@@ -100,14 +100,14 @@
       <ComboBox fx:id="cmbCustomerId" layoutX="291.0" layoutY="138.0" onAction="#cmbCustomerIdOnAction" prefHeight="26.0" prefWidth="178.0" promptText="Customer ID" />
       <ComboBox fx:id="cmbItemId" layoutX="556.0" layoutY="98.0" onAction="#cmbItemIdOnAction" prefHeight="26.0" prefWidth="178.0" promptText="Item ID" />
       <TextField fx:id="txtItemName" layoutX="556.0" layoutY="137.0" prefHeight="26.0" prefWidth="178.0" promptText="Item name" />
-      <TextField fx:id="txtItemQty" layoutX="556.0" layoutY="182.0" onKeyTyped="#txtQtyKeyTypedEvent" prefHeight="26.0" prefWidth="178.0" promptText="Qty" />
-      <TextField fx:id="txtPrice" layoutX="556.0" layoutY="225.0" prefHeight="26.0" prefWidth="178.0" promptText="Item Price" />
-      <Label layoutX="556.0" layoutY="288.0" prefHeight="20.0" prefWidth="56.0" text="Total    :">
+      <TextField fx:id="txtItemQty" layoutX="556.0" layoutY="222.0" onKeyTyped="#txtQtyKeyTypedEvent" prefHeight="26.0" prefWidth="178.0" promptText="Qty" />
+      <TextField fx:id="txtPrice" layoutX="556.0" layoutY="263.0" prefHeight="26.0" prefWidth="178.0" promptText="Item Price" />
+      <Label layoutX="556.0" layoutY="310.0" prefHeight="20.0" prefWidth="56.0" text="Total    :">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <Label fx:id="lblTotal" layoutX="625.0" layoutY="288.0" prefHeight="20.0" prefWidth="109.0" text="0.00" textAlignment="CENTER" textFill="RED">
+      <Label fx:id="lblTotal" layoutX="625.0" layoutY="310.0" prefHeight="20.0" prefWidth="109.0" text="0.00" textAlignment="CENTER" textFill="RED">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -138,5 +138,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
+      <TextField fx:id="txtAvailableQty" layoutX="650.0" layoutY="182.0" onKeyTyped="#txtQtyKeyTypedEvent" prefHeight="26.0" prefWidth="84.0" promptText="Qty" />
+      <Label layoutX="556.0" layoutY="187.0" prefHeight="18.0" prefWidth="84.0" text="Available Qty :" />
    </children>
 </AnchorPane>

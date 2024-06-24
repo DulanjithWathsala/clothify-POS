@@ -117,46 +117,61 @@ public class ManageEmployeeFormController implements Initializable {
     }
 
     public void btnUpdateOnAction(ActionEvent actionEvent) {
-        User user = userBo.getUserById(txtEmployeeId.getText());
+        if (!areTextFieldsEmpty()) {
+            User user = userBo.getUserById(txtEmployeeId.getText());
 
-        if (user != null){
-            user.setName(txtEmployeeName.getText());
-            user.setAddress(txtEmployeeAddress.getText());
-            user.setEmail(txtEmployeeEmail.getText());
+            if (user != null){
+                user.setName(txtEmployeeName.getText());
+                user.setAddress(txtEmployeeAddress.getText());
+                user.setEmail(txtEmployeeEmail.getText());
 
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to proceed?");
+                Optional<ButtonType> result = alert.showAndWait();
+                // Check if the response was OK or Cancel
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    if (userBo.updateUser(user)) {
+                        new Alert(Alert.AlertType.INFORMATION, "Employee Updated Successfully").show();
+                    }else {
+                        new Alert(Alert.AlertType.ERROR, "Update failed. Try again...").show();
+                    }
+                }
+            }else {
+                new Alert(Alert.AlertType.WARNING, "User does not exists...").show();
+            }
+            loadEmployeeTbl();
+            clearTextFields();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Input fields can't be empty!").show();
+        }
+    }
+
+    public void btnDeleteOnAction(ActionEvent actionEvent) {
+        if (!areTextFieldsEmpty()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to proceed?");
             Optional<ButtonType> result = alert.showAndWait();
             // Check if the response was OK or Cancel
             if (result.isPresent() && result.get() == ButtonType.OK) {
-                if (userBo.updateUser(user)) {
-                    new Alert(Alert.AlertType.INFORMATION, "Employee Updated Successfully").show();
+                if (userBo.deleteUserById(txtEmployeeId.getText())) {
+                    new Alert(Alert.AlertType.INFORMATION, "Employee Deleted Successfully").show();
                 }else {
-                    new Alert(Alert.AlertType.ERROR, "Update failed. Try again...").show();
+                    new Alert(Alert.AlertType.ERROR, "Delete failed. Try again...").show();
                 }
             }
-        }else {
-            new Alert(Alert.AlertType.WARNING, "User does not exists...").show();
+            loadEmployeeTbl();
+            clearTextFields();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Input fields can't be empty!").show();
         }
-        loadEmployeeTbl();
-        clearTextFields();
-    }
-
-    public void btnDeleteOnAction(ActionEvent actionEvent) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to proceed?");
-        Optional<ButtonType> result = alert.showAndWait();
-        // Check if the response was OK or Cancel
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            if (userBo.deleteUserById(txtEmployeeId.getText())) {
-                new Alert(Alert.AlertType.INFORMATION, "Employee Deleted Successfully").show();
-            }else {
-                new Alert(Alert.AlertType.ERROR, "Delete failed. Try again...").show();
-            }
-        }
-        loadEmployeeTbl();
-        clearTextFields();
     }
 
     public void btnClearOnAction(ActionEvent actionEvent) {
         clearTextFields();
+    }
+
+    private boolean areTextFieldsEmpty() {
+        return txtEmployeeId.getText().isEmpty() &&
+                txtEmployeeName.getText().isEmpty() &&
+                txtEmployeeEmail.getText().isEmpty() &&
+                txtEmployeeAddress.getText().isEmpty();
     }
 }

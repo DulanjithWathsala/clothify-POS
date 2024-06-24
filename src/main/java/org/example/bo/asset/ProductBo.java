@@ -18,5 +18,7 @@ public interface ProductBo extends SuperBo {
 
     boolean updateProduct(Product product);
 
+    boolean updateQtyById(String id, int qty);
+
     ObservableList<String> getAllProductIds();
 }

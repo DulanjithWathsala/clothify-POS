@@ -117,21 +117,25 @@ public class ProductDetailsFormController implements Initializable {
 
     @FXML
     void btnAddOnAction(ActionEvent event) {
-        Product product = new Product(
-                currentId,
-                txtItemName.getText(),
-                Integer.parseInt(txtQty.getText()),
-                txtCategory.getText(),
-                Double.parseDouble(txtPrice.getText())
-        );
+        if (!areTextFieldsEmpty()) {
+            Product product = new Product(
+                    currentId,
+                    txtItemName.getText(),
+                    Integer.parseInt(txtQty.getText()),
+                    txtCategory.getText(),
+                    Double.parseDouble(txtPrice.getText())
+            );
 
-        productBo.addProduct(product);
+            productBo.addProduct(product);
 
-        new Alert(Alert.AlertType.INFORMATION, "Product Added Successfully").show();
+            new Alert(Alert.AlertType.INFORMATION, "Product Added Successfully").show();
 
-        clearTextFields();
-        loadProductId();
-        loadProductTbl();
+            clearTextFields();
+            loadProductId();
+            loadProductTbl();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Input fields can't be empty!").show();
+        }
     }
 
     @FXML
@@ -146,18 +150,22 @@ public class ProductDetailsFormController implements Initializable {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to proceed?");
-        Optional<ButtonType> result = alert.showAndWait();
-        // Check if the response was OK or Cancel
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            if (productBo.deleteProduct(txtItemId.getText())) {
-                new Alert(Alert.AlertType.INFORMATION, "Product Deleted Successfully").show();
-            }else {
-                new Alert(Alert.AlertType.ERROR, "Delete failed. Try again...").show();
+        if (!areTextFieldsEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to proceed?");
+            Optional<ButtonType> result = alert.showAndWait();
+            // Check if the response was OK or Cancel
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                if (productBo.deleteProduct(txtItemId.getText())) {
+                    new Alert(Alert.AlertType.INFORMATION, "Product Deleted Successfully").show();
+                }else {
+                    new Alert(Alert.AlertType.ERROR, "Delete failed. Try again...").show();
+                }
             }
+            loadProductTbl();
+            clearTextFields();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Input fields can't be empty!").show();
         }
-        loadProductTbl();
-        clearTextFields();
     }
 
     @FXML
@@ -187,33 +195,45 @@ public class ProductDetailsFormController implements Initializable {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
-        Product product = productBo.getProductById(txtItemId.getText());
+        if (!areTextFieldsEmpty()) {
+            Product product = productBo.getProductById(txtItemId.getText());
 
-        if (product != null){
-            product.setName(txtItemName.getText());
-            product.setQty(Integer.parseInt(txtQty.getText()));
-            product.setCategory(txtCategory.getText());
-            product.setPrice(Double.parseDouble(txtPrice.getText()));
+            if (product != null){
+                product.setName(txtItemName.getText());
+                product.setQty(Integer.parseInt(txtQty.getText()));
+                product.setCategory(txtCategory.getText());
+                product.setPrice(Double.parseDouble(txtPrice.getText()));
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to proceed?");
-            Optional<ButtonType> result = alert.showAndWait();
-            // Check if the response was OK or Cancel
-            if (result.isPresent() && result.get() == ButtonType.OK) {
-                if (productBo.updateProduct(product)) {
-                    new Alert(Alert.AlertType.INFORMATION, "Product Updated Successfully").show();
-                }else {
-                    new Alert(Alert.AlertType.ERROR, "Update failed. Try again...").show();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to proceed?");
+                Optional<ButtonType> result = alert.showAndWait();
+                // Check if the response was OK or Cancel
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    if (productBo.updateProduct(product)) {
+                        new Alert(Alert.AlertType.INFORMATION, "Product Updated Successfully").show();
+                    }else {
+                        new Alert(Alert.AlertType.ERROR, "Update failed. Try again...").show();
+                    }
                 }
+            }else {
+                new Alert(Alert.AlertType.WARNING, "Product does not exists...").show();
             }
-        }else {
-            new Alert(Alert.AlertType.WARNING, "Product does not exists...").show();
+            loadProductTbl();
+            clearTextFields();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Input fields can't be empty!").show();
         }
-        loadProductTbl();
-        clearTextFields();
     }
 
     @FXML
     void lblCLothifyMouseClicked(MouseEvent event) throws IOException {
         sceneSwitch.switchScene(productsWindow,"dashboard-form.fxml");
+    }
+
+    private boolean areTextFieldsEmpty() {
+        return txtItemId.getText().isEmpty() &&
+                txtItemName.getText().isEmpty() &&
+                txtCategory.getText().isEmpty() &&
+                txtPrice.getText().isEmpty() &&
+                txtQty.getText().isEmpty();
     }
 }

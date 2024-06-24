@@ -76,9 +76,9 @@
       </Button>
       <TableView fx:id="tblOrder" layoutX="284.0" layoutY="114.0" prefHeight="356.0" prefWidth="484.0">
         <columns>
-          <TableColumn fx:id="colOrderId" text="Order ID" />
-          <TableColumn fx:id="colCustomerId" prefWidth="108.79998779296875" text="Customer ID" />
-            <TableColumn fx:id="colDate" prefWidth="174.4000244140625" text="Date" />
+          <TableColumn fx:id="colOrderId" prefWidth="92.0" text="Order ID" />
+          <TableColumn fx:id="colCustomerId" prefWidth="107.199951171875" text="Customer ID" />
+            <TableColumn fx:id="colDate" prefWidth="164.800048828125" text="Date" />
             <TableColumn fx:id="colAmount" prefWidth="119.20001220703125" text="Amount" />
         </columns>
       </TableView>

@@ -79,5 +79,17 @@
             <Image url="@../img/clothify.png" />
          </image>
       </ImageView>
+      <Button fx:id="btnSignOut" layoutX="69.0" layoutY="456.0" mnemonicParsing="false" onAction="#btnSignOutOnAction" prefHeight="40.0" prefWidth="44.0" style="-fx-background-color: white;">
+         <graphic>
+            <ImageView fitHeight="33.0" fitWidth="120.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../img/sign_out.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
    </children>
 </AnchorPane>

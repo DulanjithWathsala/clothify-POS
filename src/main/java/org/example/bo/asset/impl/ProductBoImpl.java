@@ -66,6 +66,11 @@ public class ProductBoImpl implements ProductBo {
     }
 
     @Override
+    public boolean updateQtyById(String id, int qty) {
+        return productDaoImpl.updateQtyById(id, qty);
+    }
+
+    @Override
     public boolean deleteProduct(String id){
         return productDaoImpl.delete(id);
     }

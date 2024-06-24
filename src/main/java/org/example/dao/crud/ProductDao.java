@@ -9,4 +9,6 @@ public interface ProductDao extends CrudDao<ProductEntity, String> {
     String getLatestId();
 
     ObservableList<String> getAllIds();
+
+    boolean updateQtyById(String id, int qty);
 }

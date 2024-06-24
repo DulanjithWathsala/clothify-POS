@@ -109,24 +109,28 @@ public class SupplierDetailsFormController implements Initializable {
 
     @FXML
     void btnAddOnAction(ActionEvent event) {
-        String email = txtSupplierEmail.getText();
-        if (supplierBo.isValidEmail(email)){
-            Supplier supplier = new Supplier(
-                    currentId,
-                    txtSupplierName.getText(),
-                    email,
-                    txtSupplierCompany.getText()
-            );
+        if (!areTextFieldsEmpty()) {
+            String email = txtSupplierEmail.getText();
+            if (supplierBo.isValidEmail(email)){
+                Supplier supplier = new Supplier(
+                        currentId,
+                        txtSupplierName.getText(),
+                        email,
+                        txtSupplierCompany.getText()
+                );
 
-            supplierBo.addSupplier(supplier);
+                supplierBo.addSupplier(supplier);
 
-            new Alert(Alert.AlertType.INFORMATION, "Supplier Added Successfully").show();
+                new Alert(Alert.AlertType.INFORMATION, "Supplier Added Successfully").show();
 
-            clearTextFields();
-            loadSupplierId();
-            loadSupplierTbl();
+                clearTextFields();
+                loadSupplierId();
+                loadSupplierTbl();
+            } else {
+                new Alert(Alert.AlertType.ERROR, "Invalid Email. Try again...").show();
+            }
         } else {
-            new Alert(Alert.AlertType.ERROR, "Invalid Email. Try again...").show();
+            new Alert(Alert.AlertType.ERROR, "Input fields can't be empty!").show();
         }
     }
 
@@ -142,18 +146,22 @@ public class SupplierDetailsFormController implements Initializable {
 
     @FXML
     void btnDeleteOnAction(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to proceed?");
-        Optional<ButtonType> result = alert.showAndWait();
-        // Check if the response was OK or Cancel
-        if (result.isPresent() && result.get() == ButtonType.OK) {
-            if (supplierBo.deleteSupplierById(txtSupplierId.getText())) {
-                new Alert(Alert.AlertType.INFORMATION, "Supplier Deleted Successfully").show();
-            }else {
-                new Alert(Alert.AlertType.ERROR, "Delete failed. Try again...").show();
+        if (!areTextFieldsEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to proceed?");
+            Optional<ButtonType> result = alert.showAndWait();
+            // Check if the response was OK or Cancel
+            if (result.isPresent() && result.get() == ButtonType.OK) {
+                if (supplierBo.deleteSupplierById(txtSupplierId.getText())) {
+                    new Alert(Alert.AlertType.INFORMATION, "Supplier Deleted Successfully").show();
+                }else {
+                    new Alert(Alert.AlertType.ERROR, "Delete failed. Try again...").show();
+                }
             }
+            loadSupplierTbl();
+            clearTextFields();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Input fields can't be empty!").show();
         }
-        loadSupplierTbl();
-        clearTextFields();
     }
 
     @FXML
@@ -183,28 +191,32 @@ public class SupplierDetailsFormController implements Initializable {
 
     @FXML
     void btnUpdateOnAction(ActionEvent event) {
-        Supplier supplier = supplierBo.getSupplierById(txtSupplierId.getText());
+        if (!areTextFieldsEmpty()) {
+            Supplier supplier = supplierBo.getSupplierById(txtSupplierId.getText());
 
-        if (supplier != null){
-            supplier.setName(txtSupplierName.getText());
-            supplier.setEmail(txtSupplierEmail.getText());
-            supplier.setCompany(txtSupplierCompany.getText());
+            if (supplier != null){
+                supplier.setName(txtSupplierName.getText());
+                supplier.setEmail(txtSupplierEmail.getText());
+                supplier.setCompany(txtSupplierCompany.getText());
 
-            Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to proceed?");
-            Optional<ButtonType> result = alert.showAndWait();
-            // Check if the response was OK or Cancel
-            if (result.isPresent() && result.get() == ButtonType.OK) {
-                if (supplierBo.updateSupplier(supplier)) {
-                    new Alert(Alert.AlertType.INFORMATION, "Supplier Updated Successfully").show();
-                }else {
-                    new Alert(Alert.AlertType.ERROR, "Update failed. Try again...").show();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to proceed?");
+                Optional<ButtonType> result = alert.showAndWait();
+                // Check if the response was OK or Cancel
+                if (result.isPresent() && result.get() == ButtonType.OK) {
+                    if (supplierBo.updateSupplier(supplier)) {
+                        new Alert(Alert.AlertType.INFORMATION, "Supplier Updated Successfully").show();
+                    }else {
+                        new Alert(Alert.AlertType.ERROR, "Update failed. Try again...").show();
+                    }
                 }
+            }else {
+                new Alert(Alert.AlertType.WARNING, "Supplier does not exists...").show();
             }
-        }else {
-            new Alert(Alert.AlertType.WARNING, "Supplier does not exists...").show();
+            loadSupplierTbl();
+            clearTextFields();
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Input fields can't be empty!").show();
         }
-        loadSupplierTbl();
-        clearTextFields();
     }
 
     @FXML
@@ -212,4 +224,10 @@ public class SupplierDetailsFormController implements Initializable {
         sceneSwitch.switchScene(supplierWindow,"dashboard-form.fxml");
     }
 
+    private boolean areTextFieldsEmpty() {
+        return txtSupplierId.getText().isEmpty() &&
+                txtSupplierName.getText().isEmpty() &&
+                txtSupplierCompany.getText().isEmpty() &&
+                txtSupplierEmail.getText().isEmpty();
+    }
 }
