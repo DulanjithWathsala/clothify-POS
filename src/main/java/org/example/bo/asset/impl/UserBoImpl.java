@@ -6,10 +6,14 @@ import javafx.collections.ObservableList;
 import org.example.bo.asset.UserBo;
 import org.example.dao.DaoFactory;
 import org.example.dao.crud.UserDao;
-import org.example.dao.crud.impl.UserDaoImpl;
 import org.example.entitiy.UserEntity;
 import org.example.model.User;
 import org.example.util.DaoType;
+
+import java.nio.charset.StandardCharsets;
+import java.util.Base64;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UserBoImpl implements UserBo {
 
@@ -93,6 +97,22 @@ public class UserBoImpl implements UserBo {
 
     @Override
     public boolean checkIfUserPasswordMatches(String name, String password) {
-        return userDaoImpl.isUserPasswordMatches(name, password);
+        return userDaoImpl.isUserPasswordMatches(name, passwordEncrypt(password));
     }
+
+    @Override
+    public String passwordEncrypt(String password){
+        return new String(Base64.getEncoder().encode(password.getBytes(StandardCharsets.UTF_8)));
+    }
+
+    @Override
+    public String passwordDecrypt(String password){
+        return new String(Base64.getDecoder().decode(password));
+    }
+
+    /*public boolean passwordValidate(String password){
+        Pattern pattern = Pattern.compile("((?=.*[0-9])(?=.*[A-Z])(?=.*[a-z])(?=.*[@#%$!&]).{8,20})");
+        Matcher matcher = pattern.matcher(password);
+        return matcher.matches();
+    }*/
 }

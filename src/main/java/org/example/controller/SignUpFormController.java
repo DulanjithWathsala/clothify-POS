@@ -71,7 +71,7 @@ public class SignUpFormController implements Initializable {
                         txtName.getText(),
                         email,
                         txtAddress.getText(),
-                        txtPassword.getText()
+                        userBo.passwordEncrypt(txtPassword.getText())
                 );
 
                 userBo.insertUser(user);

@@ -26,4 +26,8 @@ public interface UserBo extends SuperBo {
     String generateEmployeeId();
     
     boolean checkIfUserPasswordMatches(String name, String password);
+
+    String passwordEncrypt(String password);
+
+    String passwordDecrypt(String password);
 }
