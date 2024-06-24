@@ -79,7 +79,7 @@
           <TableColumn fx:id="colOrderId" text="Order ID" />
           <TableColumn fx:id="colCustomerId" prefWidth="108.79998779296875" text="Customer ID" />
             <TableColumn fx:id="colDate" prefWidth="174.4000244140625" text="Date" />
-            <TableColumn fx:id="colAmount" prefWidth="122.39996337890625" text="Amount" />
+            <TableColumn fx:id="colAmount" prefWidth="119.20001220703125" text="Amount" />
         </columns>
       </TableView>
    </children>

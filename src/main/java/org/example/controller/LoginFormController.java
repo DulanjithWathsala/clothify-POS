@@ -56,7 +56,7 @@ public class LoginFormController {
                 new Alert(Alert.AlertType.INFORMATION, "Login Success").show();
                 sceneSwitch.switchScene(loginWindow,"dashboard-form.fxml");
             } else {
-                new Alert(Alert.AlertType.ERROR, "Login Failed. Try again...").show();
+                new Alert(Alert.AlertType.ERROR, "Username, Password didn't match. Try again...").show();
             }
 
         }
