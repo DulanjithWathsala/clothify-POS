@@ -208,7 +208,6 @@ public class PlaceOrderFormController implements Initializable {
 
     @FXML
     void btnFinalizeOrderOnAction(ActionEvent event) throws JRException, IOException {
-        System.out.println(cartList);
         if (!areTextFieldsEmpty()) {
             Order order = new Order(
                     txtOrderId.getText(),
@@ -225,32 +224,9 @@ public class PlaceOrderFormController implements Initializable {
 
                 map.forEach(productBo::updateQtyById);
 
-
                 new Alert(Alert.AlertType.INFORMATION, "Order placed Successfully").show();
 
-                Map<String, Object> parameters = new HashMap<>();
-                List<Cart> list = new ArrayList<>();
-
-                String path = "D:\\ColthifyStore\\src\\main\\resources\\report\\Invoice_1.jrxml";
-                JasperReport jasperReport = JasperCompileManager.compileReport(path);
-
-                String pdfPath = "D:\\ColthifyStore\\src\\main\\resources\\reportPdf\\" + txtOrderId.getText() + ".pdf";
-
-                parameters.put("customerId", cmbCustomerId.getValue());
-                parameters.put("customerName", txtCustomerName.getText());
-                parameters.put("customerEmail", txtCustomerEmail.getText());
-                parameters.put("customerAddress", txtCustomerAddress.getText());
-
-                parameters.put("orderId", txtOrderId.getText());
-                parameters.put("orderTotal", Double.parseDouble(lblTotal.getText()));
-
-                parameters.put("invoiceId", "INV" + txtOrderId.getText());
-
-                cartList.forEach(cart -> list.add(cart));
-
-//                JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(list);
-                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters);
-                JasperExportManager.exportReportToPdfFile(jasperPrint, pdfPath);
+                //generateInvoice();
 
                 tblCart.getItems().clear();
                 map.clear();
@@ -267,13 +243,30 @@ public class PlaceOrderFormController implements Initializable {
     }
 
     private void generateInvoice() throws JRException, IOException {
+        Map<String, Object> parameters = new HashMap<>();
 
+        String path = "D:\\ColthifyStore\\src\\main\\resources\\report\\Invoice_Table_Based.jrxml";
+        JasperReport jasperReport = JasperCompileManager.compileReport(path);
 
+        String pdfPath = "D:\\ColthifyStore\\src\\main\\resources\\reportPdf\\" + txtOrderId.getText() + ".pdf";
 
-    }
+        parameters.put("customerId", cmbCustomerId.getValue());
+        parameters.put("customerName", txtCustomerName.getText());
+        parameters.put("customerEmail", txtCustomerEmail.getText());
+        parameters.put("customerAddress", txtCustomerAddress.getText());
 
-    private void viewReport() throws IOException {
-        File file = new File("D:\\ColthifyStore\\src\\main\\resources\\reportPdf\\" + txtOrderId.getText() + ".pdf");
+        parameters.put("orderId", txtOrderId.getText());
+        parameters.put("orderTotal", Double.parseDouble(lblTotal.getText()));
+
+        //parameters.put("invoiceId", "INV" + txtOrderId.getText());
+
+        //List<Cart> list = new ArrayList<>(cartList);
+
+        JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(cartList);
+        JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dataSource);
+        JasperExportManager.exportReportToPdfFile(jasperPrint, pdfPath);
+
+        File file = new File(pdfPath);
 
         if (file.exists() && Desktop.isDesktopSupported()) {
             Desktop.getDesktop().open(file);

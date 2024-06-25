@@ -10,4 +10,6 @@ public interface UserDao extends CrudDao<UserEntity, String> {
     String getLatestId();
 
     boolean isUserPasswordMatches(String name, String password);
+
+    boolean updatePasswordByEmail(String email,String password);
 }

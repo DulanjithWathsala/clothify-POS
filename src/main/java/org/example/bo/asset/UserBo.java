@@ -5,6 +5,8 @@ import org.example.bo.SuperBo;
 import org.example.entitiy.UserEntity;
 import org.example.model.User;
 
+import javax.mail.MessagingException;
+
 public interface UserBo extends SuperBo {
 
     UserEntity getUserByEmail(String email);
@@ -30,4 +32,8 @@ public interface UserBo extends SuperBo {
     String passwordEncrypt(String password);
 
     String passwordDecrypt(String password);
+
+    void sendEmail(String receiveEmail,String text) throws MessagingException;
+
+    boolean updatePasswordByEmail(String email,String password);
 }

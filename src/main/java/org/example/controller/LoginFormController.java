@@ -38,8 +38,8 @@ public class LoginFormController {
     }
 
     @FXML
-    void ForgotPasswordOnAction(ActionEvent event) {
-
+    void ForgotPasswordOnAction(ActionEvent event) throws IOException {
+        sceneSwitch.switchScene(loginWindow,"forgot-password-form.fxml");
     }
 
     @FXML

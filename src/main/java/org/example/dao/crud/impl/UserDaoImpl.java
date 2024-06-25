@@ -45,19 +45,20 @@ public class UserDaoImpl implements UserDao {
         Query query = session.createQuery("FROM user WHERE id=:id");
         query.setParameter("id",id);
         UserEntity userEntity = (UserEntity) query.uniqueResult();
+
         session.close();
         return userEntity;
     }
 
     @Override
     public UserEntity searchByEmail(String email){
-
         Session session = HibernateUtil.getSession();
         session.getTransaction().begin();
 
         Query query = session.createQuery("FROM user WHERE email=:email");
         query.setParameter("email",email);
         UserEntity userEntity = (UserEntity) query.uniqueResult();
+
         session.close();
         return userEntity;
     }
@@ -98,6 +99,21 @@ public class UserDaoImpl implements UserDao {
         session.close();
 
         return i > 0;
+    }
+
+    @Override
+    public boolean updatePasswordByEmail(String email,String password){
+        Session session = HibernateUtil.getSession();
+        session.getTransaction().begin();
+
+        Query query = session.createQuery("UPDATE user SET password =:p WHERE email =:e");
+        query.setParameter("p",password);
+        query.setParameter("e",email);
+        int i = query.executeUpdate();
+
+        session.getTransaction().commit();
+        session.close();
+        return i>0;
     }
 
     @Override
