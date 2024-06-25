@@ -9,12 +9,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.Duration;
-import lombok.Setter;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import org.example.bo.BoFactory;
 import org.example.bo.asset.CustomerBo;
 import org.example.bo.asset.PlaceOrderBo;
@@ -25,11 +28,14 @@ import org.example.model.Order;
 import org.example.model.Product;
 import org.example.util.BoType;
 
+import java.awt.*;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.*;
+import java.util.List;
 
 public class PlaceOrderFormController implements Initializable {
 
@@ -179,6 +185,7 @@ public class PlaceOrderFormController implements Initializable {
         txtCustomerAddress.setText(customer.getAddress());
         tblCart.getItems().clear();
         map.clear();
+        cartList.clear();
     }
 
     @FXML
@@ -200,7 +207,8 @@ public class PlaceOrderFormController implements Initializable {
     }
 
     @FXML
-    void btnFinalizeOrderOnAction(ActionEvent event) {
+    void btnFinalizeOrderOnAction(ActionEvent event) throws JRException, IOException {
+        System.out.println(cartList);
         if (!areTextFieldsEmpty()) {
             Order order = new Order(
                     txtOrderId.getText(),
@@ -217,18 +225,60 @@ public class PlaceOrderFormController implements Initializable {
 
                 map.forEach(productBo::updateQtyById);
 
+
                 new Alert(Alert.AlertType.INFORMATION, "Order placed Successfully").show();
+
+                Map<String, Object> parameters = new HashMap<>();
+                List<Cart> list = new ArrayList<>();
+
+                String path = "D:\\ColthifyStore\\src\\main\\resources\\report\\Invoice_1.jrxml";
+                JasperReport jasperReport = JasperCompileManager.compileReport(path);
+
+                String pdfPath = "D:\\ColthifyStore\\src\\main\\resources\\reportPdf\\" + txtOrderId.getText() + ".pdf";
+
+                parameters.put("customerId", cmbCustomerId.getValue());
+                parameters.put("customerName", txtCustomerName.getText());
+                parameters.put("customerEmail", txtCustomerEmail.getText());
+                parameters.put("customerAddress", txtCustomerAddress.getText());
+
+                parameters.put("orderId", txtOrderId.getText());
+                parameters.put("orderTotal", Double.parseDouble(lblTotal.getText()));
+
+                parameters.put("invoiceId", "INV" + txtOrderId.getText());
+
+                cartList.forEach(cart -> list.add(cart));
+
+//                JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(list);
+                JasperPrint jasperPrint = JasperFillManager.fillReport(jasperReport, parameters);
+                JasperExportManager.exportReportToPdfFile(jasperPrint, pdfPath);
 
                 tblCart.getItems().clear();
                 map.clear();
                 clearTextFields();
                 lblTotal.setText("0.00");
                 cartId = 1;
+                cartList.clear();
 
                 txtOrderId.setText(placeOrderBo.generateOrderId());
             }
         } else {
             new Alert(Alert.AlertType.ERROR, "Input fields can't be empty!").show();
+        }
+    }
+
+    private void generateInvoice() throws JRException, IOException {
+
+
+
+    }
+
+    private void viewReport() throws IOException {
+        File file = new File("D:\\ColthifyStore\\src\\main\\resources\\reportPdf\\" + txtOrderId.getText() + ".pdf");
+
+        if (file.exists() && Desktop.isDesktopSupported()) {
+            Desktop.getDesktop().open(file);
+        } else {
+            new Alert(Alert.AlertType.ERROR, "Report not found").show();
         }
     }
 

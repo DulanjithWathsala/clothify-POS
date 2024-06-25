@@ -15,5 +15,5 @@ public class Cart {
     private String name;
     private Double price;
     private Integer qty;
-    private Double Total;
+    private Double total;
 }
